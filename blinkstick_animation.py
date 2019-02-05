@@ -3,9 +3,9 @@ from blinkstick import blinkstick
 
 
 def _data_set(red=0, green=0, blue=255):
-    data = [red, green, blue]
+    data = [green, red, blue]
     for i in range(0, 31):
-        data.extend([red, green, blue])
+        data.extend([green, red, blue])
     return data
 
 
@@ -24,7 +24,7 @@ def turn_on_sequence(red=0, green=0, blue=255, step=0.1):
         turn_all_off()
         led = blinkstick.find_first()
         for i in range(1, 32):
-            led.set_color(channel=0, index=i, red=red, green=green, blue=blue)
+            led.set_color(0, i, green, red, blue)
             time.sleep(step)
 
     except KeyboardInterrupt:
@@ -46,12 +46,17 @@ def turn_off_sequence(red=0, green=0, blue=255, step=0.1):
 
 
 def blink_all(red=0, green=0, blue=255, repeats=99, freq=0.1):
-    for i in range(repeats):
-        turn_all_on(red, green, blue)
-        time.sleep(freq)
-        turn_all_off()
-        time.sleep(freq)
+    try:
+        for i in range(repeats):
+            turn_all_on(red, green, blue)
+            time.sleep(freq)
+            turn_all_off()
+            time.sleep(freq)
 
+    except KeyboardInterrupt:
+        print("Exiting... Bye!")
+        turn_all_off()
+        
 
 # turn_all_off()
 # turn_on_sequence('red')
