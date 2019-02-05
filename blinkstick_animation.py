@@ -2,15 +2,6 @@ import time
 from blinkstick import blinkstick
 
 
-# data_all_green = [255,0,0]
-# data_all_red = [0,255,0]
-# data_all_blue = [0, 0, 255]
-
-# for i in range(0, 31):
-#     data_all_green.extend([255, 0, 0])
-#     data_all_red.extend([0,255, 0])
-#     data_all_blue.extend([0, 0, 255])
-
 def _data_set(red=0, green=0, blue=255):
     data = [red, green, blue]
     for i in range(0, 31):
@@ -54,9 +45,20 @@ def turn_off_sequence(red=0, green=0, blue=255, step=0.1):
         turn_all_off()
 
 
+def blink_all(red=0, green=0, blue=255, repeats=99, freq=0.1):
+    for i in range(repeats):
+        turn_all_on(red, green, blue)
+        time.sleep(freq)
+        turn_all_off()
+        time.sleep(freq)
+
+
 # turn_all_off()
 # turn_on_sequence('red')
 # time.sleep(2)
 
-turn_all_off()
-turn_off_sequence(255, 255,0)
+# turn_all_off()
+# turn_off_sequence(255, 255,0)
+
+blink_all(0, 120, 0, 10, 0.2)
+
