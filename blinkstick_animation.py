@@ -56,7 +56,26 @@ def blink_all(red=0, green=0, blue=255, repeats=99, freq=0.1):
     except KeyboardInterrupt:
         print("Exiting... Bye!")
         turn_all_off()
-        
+
+
+def snake(red=0, green=0, blue=255, size=3, cicles=9, speed=0.1):
+    try:
+        led = blinkstick.find_first()
+        for i in range(cicles):
+            head = 0
+            while head < 32:
+                for j in range(0, 32):
+                    if head >= j > head-size:
+                        led.set_color(0, j, green, red, blue)
+                    else:
+                        led.set_color(0, j, 0, 0, 0)
+                time.sleep(speed)
+                head += 1
+
+    except KeyboardInterrupt:
+        print("Exiting... Bye!")
+        turn_all_off()
+
 
 # turn_all_off()
 # turn_on_sequence('red')
@@ -65,5 +84,7 @@ def blink_all(red=0, green=0, blue=255, repeats=99, freq=0.1):
 # turn_all_off()
 # turn_off_sequence(255, 255,0)
 
-blink_all(0, 120, 0, 10, 0.2)
+# blink_all(0, 120, 0, 10, 0.2)
 
+snake(5, 180, 5, 5, 2, 0.05)
+turn_all_off()
